@@ -1,0 +1,57 @@
+Configuration: .NET 11 RC1 Static SSR trimmed exploratory run
+SDK: 11.0.100-rc.1.26425.128
+Target RID: win-x64
+Deployment type: Self-contained
+PublishTrimmed: true
+Native AOT: false
+Runtime URL used: http://localhost:5000
+
+Publish result:
+Completed and generated self-contained trimmed output.
+
+Relevant publish diagnostics:
+- IL2026: Razor Components does not currently support trimming or Native AOT.
+- IL2026: Session State middleware does not currently support trimming or Native AOT.
+- Additional IL2026, IL2057, IL2072, IL2080, IL2101, IL2110, and IL2111 trim-analysis warnings were emitted.
+- Warnings included component discovery, component property metadata, reflection, routing, TempData JSON serialization, and Session property subscription paths.
+
+Runtime result:
+- The trimmed executable started successfully.
+- Kestrel started in the Production environment.
+- The content root pointed to artifacts\trimmed-win-x64.
+- The root request returned HTTP 500.
+- A direct request to /supported/set also returned HTTP 500.
+
+Exception type:
+System.InvalidOperationException
+
+Verbatim diagnostic:
+A suitable constructor for type
+'TempDataSessionValidation.Components.Pages.NotFound'
+could not be located. Ensure the type is concrete and all parameters
+of a public constructor are either registered as services or passed
+as arguments. Also ensure no extraneous arguments are provided.
+
+Failure phase:
+First HTTP request during Razor component activation and routing.
+
+Supported property table executed:
+No.
+
+Unsupported property tests executed:
+No. The application failed before the validation routes could execute.
+
+Property serialization regression confirmed:
+No. TempData and Session property persistence and deserialization were
+not reached.
+
+Classification:
+Configuration limitation.
+
+Conclusion:
+The Static SSR application produced trimmed output, but Razor Components
+and Session emitted explicit unsupported-trimming warnings. At runtime,
+the application failed during Razor component activation before the
+supported validation page could execute. Consequently, the trimmed
+property-type comparison was blocked and cannot be classified as a
+TempData or Session value-serialization failure.

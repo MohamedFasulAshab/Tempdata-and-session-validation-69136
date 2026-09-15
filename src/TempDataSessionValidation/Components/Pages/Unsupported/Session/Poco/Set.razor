@@ -1,0 +1,54 @@
+@page "/unsupported/session/poco/set"
+
+<PageTitle>Session Unsupported POCO Setter</PageTitle>
+
+<h1>Session unsupported POCO</h1>
+
+<div class="alert alert-warning">
+    This isolated page assigns a ValidationPoco value to a property marked
+    with SupplyParameterFromSession.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">SessionPoco</dd>
+
+    <dt class="col-sm-3">Component</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.Session.Poco.Set</code>
+    </dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.ValidationPoco</code>
+    </dd>
+
+    <dt class="col-sm-3">Storage key</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.Session.Poco</code>
+    </dd>
+
+    <dt class="col-sm-3">Value assigned</dt>
+    <dd class="col-sm-9">@SessionPoco</dd>
+</dl>
+
+<a href="/unsupported/session/poco/read"
+   class="btn btn-primary"
+   data-enhance-nav="false">
+    Read Session POCO
+</a>
+
+@code {
+    [SupplyParameterFromSession(Name = "Unsupported.Session.Poco")]
+    public ValidationPoco? SessionPoco { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SessionPoco = new ValidationPoco
+        {
+            Id = 301,
+            Name = "Session POCO",
+            IsActive = true
+        };
+    }
+}

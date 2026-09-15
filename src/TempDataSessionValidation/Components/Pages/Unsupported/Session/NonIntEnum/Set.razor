@@ -1,0 +1,52 @@
+@page "/unsupported/session/non-int-enum/set"
+
+<PageTitle>Session Non-Int Enum Setter</PageTitle>
+
+<h1>Session non-int-backed enum</h1>
+
+<div class="alert alert-warning">
+    This isolated page assigns a byte-backed enum to a property marked with
+    SupplyParameterFromSession.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">SessionNonIntEnum</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.NonIntBackedStatus</code>
+    </dd>
+
+    <dt class="col-sm-3">Underlying type</dt>
+    <dd class="col-sm-9">
+        <code>@Enum.GetUnderlyingType(typeof(NonIntBackedStatus)).FullName</code>
+    </dd>
+
+    <dt class="col-sm-3">Storage key</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.Session.NonIntEnum</code>
+    </dd>
+
+    <dt class="col-sm-3">Value assigned</dt>
+    <dd class="col-sm-9">
+        @SessionNonIntEnum
+        (numeric value: @Convert.ToByte(SessionNonIntEnum))
+    </dd>
+</dl>
+
+<a href="/unsupported/session/non-int-enum/read"
+   class="btn btn-primary"
+   data-enhance-nav="false">
+    Read Session non-int enum
+</a>
+
+@code {
+    [SupplyParameterFromSession(Name = "Unsupported.Session.NonIntEnum")]
+    public NonIntBackedStatus SessionNonIntEnum { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SessionNonIntEnum = NonIntBackedStatus.Approved;
+    }
+}

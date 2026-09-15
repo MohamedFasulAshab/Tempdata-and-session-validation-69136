@@ -1,0 +1,73 @@
+@page "/unsupported/tempdata/poco-list/set"
+
+<PageTitle>TempData Unsupported POCO List Setter</PageTitle>
+
+<h1>TempData unsupported POCO list</h1>
+
+<div class="alert alert-warning">
+    This isolated page assigns a List&lt;ValidationPoco&gt; value to a property
+    marked with SupplyParameterFromTempData.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">TempDataPocoList</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>List&lt;ValidationPoco&gt;</code>
+    </dd>
+
+    <dt class="col-sm-3">Storage key</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.TempData.PocoList</code>
+    </dd>
+
+    <dt class="col-sm-3">Assigned count</dt>
+    <dd class="col-sm-9">@TempDataPocoList?.Count</dd>
+</dl>
+
+@if (TempDataPocoList is not null)
+{
+    <ul>
+        @foreach (var item in TempDataPocoList)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}
+
+<p>
+    If this page renders, inspect the terminal after the HTTP response
+    completes for a persistence-time rejection.
+</p>
+
+<a href="/unsupported/tempdata/poco-list/read"
+   class="btn btn-primary"
+   data-enhance-nav="false">
+    Read TempData POCO list
+</a>
+
+@code {
+    [SupplyParameterFromTempData(Name = "Unsupported.TempData.PocoList")]
+    public List<ValidationPoco>? TempDataPocoList { get; set; }
+
+    protected override void OnInitialized()
+    {
+        TempDataPocoList =
+        [
+            new ValidationPoco
+            {
+                Id = 201,
+                Name = "TempData POCO list item one",
+                IsActive = true
+            },
+            new ValidationPoco
+            {
+                Id = 202,
+                Name = "TempData POCO list item two",
+                IsActive = false
+            }
+        ];
+    }
+}

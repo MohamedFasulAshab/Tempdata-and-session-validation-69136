@@ -1,0 +1,49 @@
+@page "/unsupported/tempdata/non-int-enum/read"
+
+<PageTitle>TempData Non-Int Enum Reader</PageTitle>
+
+<h1>Read TempData non-int-backed enum</h1>
+
+<div class="alert alert-warning">
+    This page attempts to restore the byte-backed enum into its declared
+    component property type.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">TempDataNonIntEnum</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.NonIntBackedStatus</code>
+    </dd>
+
+    <dt class="col-sm-3">Underlying type</dt>
+    <dd class="col-sm-9">
+        <code>@Enum.GetUnderlyingType(typeof(NonIntBackedStatus)).FullName</code>
+    </dd>
+
+    <dt class="col-sm-3">Observed value</dt>
+    <dd class="col-sm-9">@TempDataNonIntEnum</dd>
+
+    <dt class="col-sm-3">Numeric value</dt>
+    <dd class="col-sm-9">@Convert.ToByte(TempDataNonIntEnum)</dd>
+
+    <dt class="col-sm-3">Runtime type</dt>
+    <dd class="col-sm-9">
+        <code>@GetRuntimeType(TempDataNonIntEnum)</code>
+    </dd>
+</dl>
+
+<a href="/unsupported/tempdata/non-int-enum/set"
+   class="btn btn-outline-primary"
+   data-enhance-nav="false">
+    Set TempData non-int enum again
+</a>
+@code {
+    [SupplyParameterFromTempData(Name = "Unsupported.TempData.NonIntEnum")]
+    public NonIntBackedStatus TempDataNonIntEnum { get; set; }
+
+    private static string GetRuntimeType(object? value)
+        => value?.GetType().FullName ?? "<null>";
+}

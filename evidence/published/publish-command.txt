@@ -1,0 +1,1 @@
+dotnet publish .\src\TempDataSessionValidation\TempDataSessionValidation.csproj -c Release -o .\artifacts\published

@@ -1,0 +1,1 @@
+dotnet publish .\src\TempDataSessionValidation\TempDataSessionValidation.csproj -c Release -r win-x64 --self-contained true -p:PublishTrimmed=true -p:SuppressTrimAnalysisWarnings=false -p:TrimmerSingleWarn=false -o .\artifacts\trimmed-win-x64

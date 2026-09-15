@@ -1,0 +1,9 @@
+About
+Error.
+An error occurred while processing your request.
+Request ID: 00-924c6996ac9a2ed2315dc40154c28590-f724a99167192e1e-02
+
+Development Mode
+Swapping to Development environment will display more detailed information about the error that occurred.
+
+The Development environment shouldn't be enabled for deployed applications. It can result in displaying sensitive information from exceptions to end users. For local debugging, enable the Development environment by setting the ASPNETCORE_ENVIRONMENT environment variable to Development and restarting the app.

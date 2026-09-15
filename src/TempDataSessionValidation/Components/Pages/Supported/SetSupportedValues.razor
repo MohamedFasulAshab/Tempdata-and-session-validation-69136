@@ -1,0 +1,284 @@
+@page "/supported/set"
+
+<PageTitle>Set Supported Values</PageTitle>
+
+<h1>Set supported values</h1>
+
+<p>
+    This page assigns deterministic values to properties supplied from
+    TempData and Session during Static SSR.
+</p>
+
+<div class="alert alert-success">
+    The supported test values were assigned during this HTTP request.
+</div>
+
+<h2>Values assigned</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Case</th>
+            <th>Declared type</th>
+            <th>Value assigned</th>
+            <th>TempData key</th>
+            <th>Session key</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>String</td>
+            <td>System.String</td>
+            <td>RC1 validation value</td>
+            <td>Supported.String</td>
+            <td>Supported.String</td>
+        </tr>
+        <tr>
+            <td>Integer</td>
+            <td>System.Int32</td>
+            <td>42</td>
+            <td>Supported.Int</td>
+            <td>Supported.Int</td>
+        </tr>
+        <tr>
+            <td>Boolean</td>
+            <td>System.Boolean</td>
+            <td>True</td>
+            <td>Supported.Bool</td>
+            <td>Supported.Bool</td>
+        </tr>
+        <tr>
+            <td>Int-backed enum</td>
+            <td>IntBackedStatus</td>
+            <td>Approved</td>
+            <td>Supported.IntEnum</td>
+            <td>Supported.IntEnum</td>
+        </tr>
+        <tr>
+            <td>GUID</td>
+            <td>System.Guid</td>
+            <td>8f14e45f-ea5e-4f5c-a123-0123456789ab</td>
+            <td>Supported.Guid</td>
+            <td>Supported.Guid</td>
+        </tr>
+        <tr>
+            <td>DateTime</td>
+            <td>System.DateTime</td>
+            <td>2026-09-10T10:30:45.0000000Z</td>
+            <td>Supported.DateTime</td>
+            <td>Supported.DateTime</td>
+        </tr>
+        <tr>
+            <td>Nullable with value</td>
+            <td>System.Nullable&lt;System.Int32&gt;</td>
+            <td>84</td>
+            <td>Supported.NullableValue</td>
+            <td>Supported.NullableValue</td>
+        </tr>
+        <tr>
+            <td>Nullable explicitly set to null</td>
+            <td>System.Nullable&lt;System.Int32&gt;</td>
+            <td>&lt;null&gt;</td>
+            <td>Supported.NullableNull</td>
+            <td>Supported.NullableNull</td>
+        </tr>
+        <tr>
+            <td>Nullable never set</td>
+            <td>System.Nullable&lt;System.Int32&gt;</td>
+            <td>No setter property or key</td>
+            <td>Supported.NullableMissing</td>
+            <td>Supported.NullableMissing</td>
+        </tr>
+        <tr>
+            <td>String list</td>
+            <td>List&lt;string&gt;</td>
+            <td>Alpha, Beta, Gamma</td>
+            <td>Supported.StringList</td>
+            <td>Supported.StringList</td>
+        </tr>
+        <tr>
+            <td>Empty string list</td>
+            <td>List&lt;string&gt;</td>
+            <td>Empty collection, Count = 0</td>
+            <td>Supported.EmptyStringList</td>
+            <td>Supported.EmptyStringList</td>
+        </tr>
+        <tr>
+            <td>Null string list</td>
+            <td>List&lt;string&gt;</td>
+            <td>&lt;null&gt;</td>
+            <td>Supported.NullStringList</td>
+            <td>Supported.NullStringList</td>
+        </tr>
+        <tr>
+            <td>Dictionary</td>
+            <td>Dictionary&lt;string, int&gt;</td>
+            <td>Alpha=10, Beta=20</td>
+            <td>Supported.Dictionary</td>
+            <td>Supported.Dictionary</td>
+        </tr>
+        <tr>
+            <td>String array</td>
+            <td>System.String[]</td>
+            <td>First, Second, Third</td>
+            <td>Supported.StringArray</td>
+            <td>Supported.StringArray</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    Continue only after this page has completely loaded. Persistence may occur
+    as the HTTP response completes.
+</p>
+
+<a href="/supported/read"  class="btn btn-primary" data-enhance-nav="false"> Read </a>
+
+@code {
+    [SupplyParameterFromTempData(Name = "Supported.String")]
+    public string? TempDataString { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.String")]
+    public string? SessionString { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Int")]
+    public int TempDataInt { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Int")]
+    public int SessionInt { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Bool")]
+    public bool TempDataBool { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Bool")]
+    public bool SessionBool { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.IntEnum")]
+    public IntBackedStatus TempDataIntEnum { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.IntEnum")]
+    public IntBackedStatus SessionIntEnum { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Guid")]
+    public Guid TempDataGuid { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Guid")]
+    public Guid SessionGuid { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.DateTime")]
+    public DateTime TempDataDateTime { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.DateTime")]
+    public DateTime SessionDateTime { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullableValue")]
+    public int? TempDataNullableValue { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullableValue")]
+    public int? SessionNullableValue { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullableNull")]
+    public int? TempDataNullableNull { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullableNull")]
+    public int? SessionNullableNull { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.StringList")]
+    public List<string>? TempDataStringList { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.StringList")]
+    public List<string>? SessionStringList { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.EmptyStringList")]
+    public List<string>? TempDataEmptyStringList { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.EmptyStringList")]
+    public List<string>? SessionEmptyStringList { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullStringList")]
+    public List<string>? TempDataNullStringList { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullStringList")]
+    public List<string>? SessionNullStringList { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Dictionary")]
+    public Dictionary<string, int>? TempDataDictionary { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Dictionary")]
+    public Dictionary<string, int>? SessionDictionary { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.StringArray")]
+    public string[]? TempDataStringArray { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.StringArray")]
+    public string[]? SessionStringArray { get; set; }
+
+    protected override void OnInitialized()
+    {
+        TempDataString = "RC1 validation value";
+        SessionString = "RC1 validation value";
+
+        TempDataInt = 42;
+        SessionInt = 42;
+
+        TempDataBool = true;
+        SessionBool = true;
+
+        TempDataIntEnum = IntBackedStatus.Approved;
+        SessionIntEnum = IntBackedStatus.Approved;
+
+        TempDataGuid =
+            Guid.Parse("8f14e45f-ea5e-4f5c-a123-0123456789ab");
+
+        SessionGuid =
+            Guid.Parse("8f14e45f-ea5e-4f5c-a123-0123456789ab");
+
+        TempDataDateTime = new DateTime(
+            2026,
+            9,
+            10,
+            10,
+            30,
+            45,
+            DateTimeKind.Utc);
+
+        SessionDateTime = new DateTime(
+            2026,
+            9,
+            10,
+            10,
+            30,
+            45,
+            DateTimeKind.Utc);
+
+        TempDataNullableValue = 84;
+        SessionNullableValue = 84;
+
+        TempDataNullableNull = null;
+        SessionNullableNull = null;
+
+        TempDataStringList = ["Alpha", "Beta", "Gamma"];
+        SessionStringList = ["Alpha", "Beta", "Gamma"];
+
+        TempDataEmptyStringList = [];
+        SessionEmptyStringList = [];
+
+        TempDataNullStringList = null;
+        SessionNullStringList = null;
+
+        TempDataDictionary = new Dictionary<string, int>
+        {
+            ["Alpha"] = 10,
+            ["Beta"] = 20
+        };
+
+        SessionDictionary = new Dictionary<string, int>
+        {
+            ["Alpha"] = 10,
+            ["Beta"] = 20
+        };
+
+        TempDataStringArray = ["First", "Second", "Third"];
+        SessionStringArray = ["First", "Second", "Third"];
+    }
+}

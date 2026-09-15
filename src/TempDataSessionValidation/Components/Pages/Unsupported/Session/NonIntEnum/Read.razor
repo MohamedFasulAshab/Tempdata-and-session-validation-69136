@@ -1,0 +1,50 @@
+@page "/unsupported/session/non-int-enum/read"
+
+<PageTitle>Session Non-Int Enum Reader</PageTitle>
+
+<h1>Read Session non-int-backed enum</h1>
+
+<div class="alert alert-warning">
+    This component attempts to receive the byte-backed enum through
+    SupplyParameterFromSession.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">SessionNonIntEnum</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.NonIntBackedStatus</code>
+    </dd>
+
+    <dt class="col-sm-3">Underlying type</dt>
+    <dd class="col-sm-9">
+        <code>@Enum.GetUnderlyingType(typeof(NonIntBackedStatus)).FullName</code>
+    </dd>
+
+    <dt class="col-sm-3">Observed value</dt>
+    <dd class="col-sm-9">@SessionNonIntEnum</dd>
+
+    <dt class="col-sm-3">Numeric value</dt>
+    <dd class="col-sm-9">@Convert.ToByte(SessionNonIntEnum)</dd>
+
+    <dt class="col-sm-3">Runtime type</dt>
+    <dd class="col-sm-9">
+        <code>@GetRuntimeType(SessionNonIntEnum)</code>
+    </dd>
+</dl>
+
+<a href="/unsupported/session/non-int-enum/set"
+   class="btn btn-outline-primary"
+   data-enhance-nav="false">
+    Set Session non-int enum again
+</a>
+
+@code {
+    [SupplyParameterFromSession(Name = "Unsupported.Session.NonIntEnum")]
+    public NonIntBackedStatus SessionNonIntEnum { get; set; }
+
+    private static string GetRuntimeType(object? value)
+        => value?.GetType().FullName ?? "<null>";
+}

@@ -1,0 +1,55 @@
+@page "/unsupported/tempdata/poco/set"
+
+<PageTitle>TempData Unsupported POCO Setter</PageTitle>
+
+<h1>TempData unsupported POCO</h1>
+
+<div class="alert alert-warning">
+    This isolated page assigns a ValidationPoco value to a property marked
+    with SupplyParameterFromTempData.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">TempDataPoco</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.ValidationPoco</code>
+    </dd>
+
+    <dt class="col-sm-3">Storage key</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.TempData.Poco</code>
+    </dd>
+
+    <dt class="col-sm-3">Value assigned</dt>
+    <dd class="col-sm-9">@TempDataPoco</dd>
+</dl>
+
+<p>
+    If this page reaches the browser, inspect the terminal after the response
+    completes. TempData may reject the value during persistence.
+</p>
+
+<a href="/unsupported/tempdata/poco/read"
+   class="btn btn-primary"
+   data-enhance-nav="false">
+    Read TempData POCO
+</a>
+
+@code
+{
+    [SupplyParameterFromTempData(Name = "Unsupported.TempData.Poco")]
+    public ValidationPoco? TempDataPoco { get; set; }
+
+    protected override void OnInitialized()
+    {
+        TempDataPoco = new ValidationPoco
+        {
+            Id = 101,
+            Name = "TempData POCO",
+            IsActive = true
+        };
+    }
+}

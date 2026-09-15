@@ -1,0 +1,45 @@
+@page "/unsupported/session/poco/read"
+
+<PageTitle>Session Unsupported POCO Reader</PageTitle>
+
+<h1>Read Session unsupported POCO</h1>
+
+<div class="alert alert-warning">
+    This component declares an unsupported concrete Session property. Record
+    whether rejection occurs before any page content is sent to the browser.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">SessionPoco</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.ValidationPoco</code>
+    </dd>
+
+    <dt class="col-sm-3">Observed value</dt>
+    <dd class="col-sm-9">@FormatValue(SessionPoco)</dd>
+
+    <dt class="col-sm-3">Runtime type</dt>
+    <dd class="col-sm-9">
+        <code>@GetRuntimeType(SessionPoco)</code>
+    </dd>
+</dl>
+
+<a href="/unsupported/session/poco/set"
+   class="btn btn-outline-primary"
+   data-enhance-nav="false">
+    Set Session POCO again
+</a>
+
+@code {
+    [SupplyParameterFromSession(Name = "Unsupported.Session.Poco")]
+    public ValidationPoco? SessionPoco { get; set; }
+
+    private static string FormatValue(object? value)
+        => value?.ToString() ?? "<null>";
+
+    private static string GetRuntimeType(object? value)
+        => value?.GetType().FullName ?? "<null>";
+}

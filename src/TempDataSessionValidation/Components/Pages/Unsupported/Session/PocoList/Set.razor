@@ -1,0 +1,68 @@
+@page "/unsupported/session/poco-list/set"
+
+<PageTitle>Session Unsupported POCO List Setter</PageTitle>
+
+<h1>Session unsupported POCO list</h1>
+
+<div class="alert alert-warning">
+    This isolated page assigns a List&lt;ValidationPoco&gt; value to a property
+    marked with SupplyParameterFromSession.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">SessionPocoList</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>List&lt;ValidationPoco&gt;</code>
+    </dd>
+
+    <dt class="col-sm-3">Storage key</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.Session.PocoList</code>
+    </dd>
+
+    <dt class="col-sm-3">Assigned count</dt>
+    <dd class="col-sm-9">@SessionPocoList?.Count</dd>
+</dl>
+
+@if (SessionPocoList is not null)
+{
+    <ul>
+        @foreach (var item in SessionPocoList)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}
+
+<a href="/unsupported/session/poco-list/read"
+   class="btn btn-primary"
+   data-enhance-nav="false">
+    Read Session POCO list
+</a>
+
+@code {
+    [SupplyParameterFromSession(Name = "Unsupported.Session.PocoList")]
+    public List<ValidationPoco>? SessionPocoList { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SessionPocoList =
+        [
+            new ValidationPoco
+            {
+                Id = 401,
+                Name = "Session POCO list item one",
+                IsActive = true
+            },
+            new ValidationPoco
+            {
+                Id = 402,
+                Name = "Session POCO list item two",
+                IsActive = false
+            }
+        ];
+    }
+}

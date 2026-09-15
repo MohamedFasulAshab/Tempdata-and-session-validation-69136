@@ -1,0 +1,16 @@
+fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      System.InvalidOperationException: Cannot serialize type 'TempDataSessionValidation.Models.NonIntBackedStatus'.
+         at Microsoft.AspNetCore.Components.Endpoints.JsonStoredDataSerializer.WriteEntry(Utf8JsonWriter writer, Object value, Type type)
+         at Microsoft.AspNetCore.Components.Endpoints.JsonStoredDataSerializer.SerializeData(IDictionary`2 data)
+         at Microsoft.AspNetCore.Components.Endpoints.CookieTempDataProvider.SaveTempData(HttpContext context, IDictionary`2 values)
+         at Microsoft.AspNetCore.Components.Endpoints.TempDataService.Persist(HttpContext httpContext)
+         at Microsoft.AspNetCore.Components.Endpoints.RazorComponentEndpointInvoker.RenderComponentCore(HttpContext context)
+         at Microsoft.AspNetCore.Components.Endpoints.RazorComponentEndpointInvoker.RenderComponentCore(HttpContext context)
+         at Microsoft.AspNetCore.Components.Rendering.RendererSynchronizationContext.<>c.<<InvokeAsync>b__10_0>d.MoveNext()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Antiforgery.CsrfProtectionMiddleware.InvokeCoreAsync(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)

@@ -1,0 +1,52 @@
+@page "/unsupported/tempdata/non-int-enum/set"
+
+<PageTitle>TempData Non-Int Enum Setter</PageTitle>
+
+<h1>TempData non-int-backed enum</h1>
+
+<div class="alert alert-warning">
+    This isolated page assigns a byte-backed enum to a property marked with
+    SupplyParameterFromTempData.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">TempDataNonIntEnum</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>TempDataSessionValidation.Models.NonIntBackedStatus</code>
+    </dd>
+
+    <dt class="col-sm-3">Underlying type</dt>
+    <dd class="col-sm-9">
+        <code>@Enum.GetUnderlyingType(typeof(NonIntBackedStatus)).FullName</code>
+    </dd>
+
+    <dt class="col-sm-3">Storage key</dt>
+    <dd class="col-sm-9">
+        <code>Unsupported.TempData.NonIntEnum</code>
+    </dd>
+
+    <dt class="col-sm-3">Value assigned</dt>
+    <dd class="col-sm-9">
+        @TempDataNonIntEnum
+        (numeric value: @Convert.ToByte(TempDataNonIntEnum))
+    </dd>
+</dl>
+
+<a href="/unsupported/tempdata/non-int-enum/read"
+   class="btn btn-primary"
+   data-enhance-nav="false">
+    Read TempData non-int enum
+</a>
+
+@code {
+    [SupplyParameterFromTempData(Name = "Unsupported.TempData.NonIntEnum")]
+    public NonIntBackedStatus TempDataNonIntEnum { get; set; }
+
+    protected override void OnInitialized()
+    {
+        TempDataNonIntEnum = NonIntBackedStatus.Approved;
+    }
+}

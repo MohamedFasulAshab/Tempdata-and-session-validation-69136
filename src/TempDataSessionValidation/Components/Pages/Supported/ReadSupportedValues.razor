@@ -1,0 +1,479 @@
+@page "/supported/read"
+
+<PageTitle>Read Supported Values</PageTitle>
+
+<h1>Read supported values</h1>
+
+<p>
+    This page reads the persisted values into their declared property types
+    during a new Static SSR HTTP request.
+</p>
+
+@if (Attempt <= 1)
+{
+    <div class="alert alert-primary">
+        <strong>Read attempt 1:</strong>
+        First full HTTP request after setting the TempData and Session values.
+        This request validates the initial supported-type round trip.
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">
+        <strong>Read attempt @Attempt:</strong>
+        Additional full HTTP request without returning to the setter.
+        Compare the observed TempData and Session values with read attempt 1.
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Case</th>
+                <th>Declared type</th>
+                <th>Expected</th>
+                <th>TempData value</th>
+                <th>TempData runtime type</th>
+                <th>TempData verdict</th>
+                <th>Session value</th>
+                <th>Session runtime type</th>
+                <th>Session verdict</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Rows)
+            {
+                <tr>
+                    <td>@row.Case</td>
+                    <td><code>@row.DeclaredType</code></td>
+                    <td>@row.Expected</td>
+
+                    <td>@row.TempDataValue</td>
+                    <td><code>@row.TempDataRuntimeType</code></td>
+                    <td>
+                        <span class="@GetVerdictClass(row.TempDataVerdict)">
+                            @row.TempDataVerdict
+                        </span>
+                    </td>
+
+                    <td>@row.SessionValue</td>
+                    <td><code>@row.SessionRuntimeType</code></td>
+                    <td>
+                        <span class="@GetVerdictClass(row.SessionVerdict)">
+                            @row.SessionVerdict
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h2>Special observations</h2>
+
+<ul>
+    <li>
+        <strong>Enum:</strong>
+        TempData numeric value = @((int)TempDataIntEnum);
+        Session numeric value = @((int)SessionIntEnum).
+    </li>
+    <li>
+        <strong>TempData DateTime:</strong>
+        @FormatDateTime(TempDataDateTime),
+        Kind = @TempDataDateTime.Kind,
+        Ticks = @TempDataDateTime.Ticks.
+    </li>
+    <li>
+        <strong>Session DateTime:</strong>
+        @FormatDateTime(SessionDateTime),
+        Kind = @SessionDateTime.Kind,
+        Ticks = @SessionDateTime.Ticks.
+    </li>
+    <li>
+        <strong>Null versus missing:</strong>
+        A null property value alone may not reveal whether a null was explicitly
+        assigned or whether no storage key existed. The observed values are
+        recorded separately without assuming they have distinct storage representations.
+    </li>
+</ul>
+
+<div class="d-flex gap-2">
+    <a href="/supported/set" class="btn btn-outline-primary" data-enhance-nav="false"> Set again</a>
+    <a href="/supported/read?attempt=2" class="btn btn-secondary" data-enhance-nav="false">Full-request read again</a>
+</div>
+
+@code {
+    private static readonly Guid ExpectedGuid =
+        Guid.Parse("8f14e45f-ea5e-4f5c-a123-0123456789ab");
+
+    private static readonly DateTime ExpectedDateTime =
+        new(
+            2026,
+            9,
+            10,
+            10,
+            30,
+            45,
+            DateTimeKind.Utc);
+
+    private List<ResultRow> Rows { get; } = [];
+
+    [SupplyParameterFromQuery(Name = "attempt")]
+    public int Attempt { get; set; } = 1;
+
+    [SupplyParameterFromTempData(Name = "Supported.String")]
+    public string? TempDataString { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.String")]
+    public string? SessionString { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Int")]
+    public int TempDataInt { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Int")]
+    public int SessionInt { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Bool")]
+    public bool TempDataBool { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Bool")]
+    public bool SessionBool { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.IntEnum")]
+    public IntBackedStatus TempDataIntEnum { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.IntEnum")]
+    public IntBackedStatus SessionIntEnum { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Guid")]
+    public Guid TempDataGuid { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Guid")]
+    public Guid SessionGuid { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.DateTime")]
+    public DateTime TempDataDateTime { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.DateTime")]
+    public DateTime SessionDateTime { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullableValue")]
+    public int? TempDataNullableValue { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullableValue")]
+    public int? SessionNullableValue { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullableNull")]
+    public int? TempDataNullableNull { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullableNull")]
+    public int? SessionNullableNull { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullableMissing")]
+    public int? TempDataNullableMissing { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullableMissing")]
+    public int? SessionNullableMissing { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.StringList")]
+    public List<string>? TempDataStringList { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.StringList")]
+    public List<string>? SessionStringList { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.EmptyStringList")]
+    public List<string>? TempDataEmptyStringList { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.EmptyStringList")]
+    public List<string>? SessionEmptyStringList { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.NullStringList")]
+    public List<string>? TempDataNullStringList { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.NullStringList")]
+    public List<string>? SessionNullStringList { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.Dictionary")]
+    public Dictionary<string, int>? TempDataDictionary { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.Dictionary")]
+    public Dictionary<string, int>? SessionDictionary { get; set; }
+
+    [SupplyParameterFromTempData(Name = "Supported.StringArray")]
+    public string[]? TempDataStringArray { get; set; }
+
+    [SupplyParameterFromSession(Name = "Supported.StringArray")]
+    public string[]? SessionStringArray { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Rows.Clear();
+
+        AddRow(
+            "String",
+            "System.String",
+            "RC1 validation value",
+            TempDataString,
+            SessionString,
+            TempDataString == "RC1 validation value",
+            SessionString == "RC1 validation value");
+
+        AddRow(
+            "Integer",
+            "System.Int32",
+            "42",
+            TempDataInt,
+            SessionInt,
+            TempDataInt == 42,
+            SessionInt == 42);
+
+        AddRow(
+            "Boolean",
+            "System.Boolean",
+            "True",
+            TempDataBool,
+            SessionBool,
+            TempDataBool,
+            SessionBool);
+
+        AddRow(
+            "Int-backed enum",
+            typeof(IntBackedStatus).FullName ?? nameof(IntBackedStatus),
+            "Approved",
+            TempDataIntEnum,
+            SessionIntEnum,
+            TempDataIntEnum == IntBackedStatus.Approved,
+            SessionIntEnum == IntBackedStatus.Approved);
+
+        AddRow(
+            "GUID",
+            "System.Guid",
+            ExpectedGuid.ToString(),
+            TempDataGuid,
+            SessionGuid,
+            TempDataGuid == ExpectedGuid,
+            SessionGuid == ExpectedGuid);
+
+        AddDateTimeRow();
+
+        AddRow(
+            "Nullable with value",
+            "System.Nullable<System.Int32>",
+            "84",
+            TempDataNullableValue,
+            SessionNullableValue,
+            TempDataNullableValue == 84,
+            SessionNullableValue == 84);
+
+        AddNullObservationRow(
+            "Nullable explicitly set to null",
+            "System.Nullable<System.Int32>",
+            TempDataNullableNull,
+            SessionNullableNull);
+
+        AddNullObservationRow(
+            "Nullable never set",
+            "System.Nullable<System.Int32>",
+            TempDataNullableMissing,
+            SessionNullableMissing);
+
+        AddRow(
+            "String list",
+            "System.Collections.Generic.List<System.String>",
+            "Alpha, Beta, Gamma",
+            TempDataStringList,
+            SessionStringList,
+            SequenceMatches(
+                TempDataStringList,
+                ["Alpha", "Beta", "Gamma"]),
+            SequenceMatches(
+                SessionStringList,
+                ["Alpha", "Beta", "Gamma"]));
+
+        AddRow(
+            "Empty string list",
+            "System.Collections.Generic.List<System.String>",
+            "Empty collection, Count = 0",
+            TempDataEmptyStringList,
+            SessionEmptyStringList,
+            TempDataEmptyStringList is { Count: 0 },
+            SessionEmptyStringList is { Count: 0 });
+
+        AddNullObservationRow(
+            "Null string list",
+            "System.Collections.Generic.List<System.String>",
+            TempDataNullStringList,
+            SessionNullStringList);
+
+        AddRow(
+            "Dictionary",
+            "System.Collections.Generic.Dictionary<System.String,System.Int32>",
+            "Alpha=10, Beta=20",
+            TempDataDictionary,
+            SessionDictionary,
+            DictionaryMatches(TempDataDictionary),
+            DictionaryMatches(SessionDictionary));
+
+        AddRow(
+            "String array",
+            "System.String[]",
+            "First, Second, Third",
+            TempDataStringArray,
+            SessionStringArray,
+            SequenceMatches(
+                TempDataStringArray,
+                ["First", "Second", "Third"]),
+            SequenceMatches(
+                SessionStringArray,
+                ["First", "Second", "Third"]));
+    }
+
+    private void AddDateTimeRow()
+    {
+        var tempDataPassed =
+            TempDataDateTime == ExpectedDateTime &&
+            TempDataDateTime.Kind == DateTimeKind.Utc;
+
+        var sessionPassed =
+            SessionDateTime == ExpectedDateTime &&
+            SessionDateTime.Kind == DateTimeKind.Utc;
+
+        Rows.Add(
+            new ResultRow(
+                "DateTime",
+                "System.DateTime",
+                $"{ExpectedDateTime:O}; Kind=Utc",
+                $"{TempDataDateTime:O}; Kind={TempDataDateTime.Kind}",
+                GetRuntimeType(TempDataDateTime),
+                Verdict(tempDataPassed),
+                $"{SessionDateTime:O}; Kind={SessionDateTime.Kind}",
+                GetRuntimeType(SessionDateTime),
+                Verdict(sessionPassed)));
+    }
+
+    private void AddRow(
+        string caseName,
+        string declaredType,
+        string expected,
+        object? tempDataValue,
+        object? sessionValue,
+        bool tempDataPassed,
+        bool sessionPassed)
+    {
+        Rows.Add(
+            new ResultRow(
+                caseName,
+                declaredType,
+                expected,
+                FormatValue(tempDataValue),
+                GetRuntimeType(tempDataValue),
+                Verdict(tempDataPassed),
+                FormatValue(sessionValue),
+                GetRuntimeType(sessionValue),
+                Verdict(sessionPassed)));
+    }
+
+    private void AddNullObservationRow(
+        string caseName,
+        string declaredType,
+        object? tempDataValue,
+        object? sessionValue)
+    {
+        Rows.Add(
+            new ResultRow(
+                caseName,
+                declaredType,
+                "<null>",
+                FormatValue(tempDataValue),
+                GetRuntimeType(tempDataValue),
+                tempDataValue is null ? "Observed null" : "Fail",
+                FormatValue(sessionValue),
+                GetRuntimeType(sessionValue),
+                sessionValue is null ? "Observed null" : "Fail"));
+    }
+
+    private static string FormatValue(object? value)
+    {
+        return value switch
+        {
+            null => "<null>",
+
+            DateTime dateTime =>
+                $"{dateTime:O}; Kind={dateTime.Kind}",
+
+            Array array =>
+                $"[{string.Join(", ", array.Cast<object>())}]; " +
+                $"Length={array.Length}",
+
+            IEnumerable<string> strings =>
+                $"[{string.Join(", ", strings)}]; " +
+                $"Count={strings.Count()}",
+
+            IDictionary<string, int> dictionary =>
+                $"[{string.Join(
+                    ", ",
+                    dictionary.Select(pair => $"{pair.Key}={pair.Value}"))}]; " +
+                $"Count={dictionary.Count}",
+
+            _ => value.ToString() ?? "<null>"
+        };
+    }
+
+    private static string GetRuntimeType(object? value)
+    {
+        return value?.GetType().FullName ?? "<null>";
+    }
+
+    private static string FormatDateTime(DateTime value)
+    {
+        return value.ToString("O");
+    }
+
+    private static bool SequenceMatches(
+        IEnumerable<string>? actual,
+        IEnumerable<string> expected)
+    {
+        return actual is not null &&
+               actual.SequenceEqual(expected);
+    }
+
+    private static bool DictionaryMatches(
+        Dictionary<string, int>? dictionary)
+    {
+        return dictionary is
+        {
+            Count: 2
+        } &&
+        dictionary.TryGetValue("Alpha", out var alpha) &&
+        alpha == 10 &&
+        dictionary.TryGetValue("Beta", out var beta) &&
+        beta == 20;
+    }
+
+    private static string Verdict(bool passed)
+    {
+        return passed ? "Pass" : "Fail";
+    }
+
+    private static string GetVerdictClass(string verdict)
+    {
+        return verdict switch
+        {
+            "Pass" => "badge text-bg-success",
+            "Observed null" => "badge text-bg-info",
+            _ => "badge text-bg-danger"
+        };
+    }
+
+    private sealed record ResultRow(
+        string Case,
+        string DeclaredType,
+        string Expected,
+        string TempDataValue,
+        string TempDataRuntimeType,
+        string TempDataVerdict,
+        string SessionValue,
+        string SessionRuntimeType,
+        string SessionVerdict);
+}

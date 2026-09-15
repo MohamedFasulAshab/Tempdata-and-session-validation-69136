@@ -1,0 +1,49 @@
+@page "/unsupported/session/poco-list/read"
+
+<PageTitle>Session Unsupported POCO List Reader</PageTitle>
+
+<h1>Read Session unsupported POCO list</h1>
+
+<div class="alert alert-warning">
+    This component attempts to receive a List&lt;ValidationPoco&gt; through
+    SupplyParameterFromSession.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">SessionPocoList</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>List&lt;ValidationPoco&gt;</code>
+    </dd>
+
+    <dt class="col-sm-3">Observed value</dt>
+    <dd class="col-sm-9">@FormatList(SessionPocoList)</dd>
+
+    <dt class="col-sm-3">Runtime type</dt>
+    <dd class="col-sm-9">
+        <code>@GetRuntimeType(SessionPocoList)</code>
+    </dd>
+</dl>
+
+<a href="/unsupported/session/poco-list/set"
+   class="btn btn-outline-primary"
+   data-enhance-nav="false">
+    Set Session POCO list again
+</a>
+
+@code {
+    [SupplyParameterFromSession(Name = "Unsupported.Session.PocoList")]
+    public List<ValidationPoco>? SessionPocoList { get; set; }
+
+    private static string FormatList(List<ValidationPoco>? value)
+    {
+        return value is null
+            ? "<null>"
+            : $"[{string.Join(" | ", value)}]; Count={value.Count}";
+    }
+
+    private static string GetRuntimeType(object? value)
+        => value?.GetType().FullName ?? "<null>";
+}

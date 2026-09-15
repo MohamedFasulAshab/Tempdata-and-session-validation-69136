@@ -1,0 +1,49 @@
+@page "/unsupported/tempdata/poco-list/read"
+
+<PageTitle>TempData Unsupported POCO List Reader</PageTitle>
+
+<h1>Read TempData unsupported POCO list</h1>
+
+<div class="alert alert-warning">
+    This page attempts to receive the previously assigned POCO list through
+    SupplyParameterFromTempData.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">TempDataPocoList</dd>
+
+    <dt class="col-sm-3">Declared type</dt>
+    <dd class="col-sm-9">
+        <code>List&lt;ValidationPoco&gt;</code>
+    </dd>
+
+    <dt class="col-sm-3">Observed value</dt>
+    <dd class="col-sm-9">@FormatList(TempDataPocoList)</dd>
+
+    <dt class="col-sm-3">Runtime type</dt>
+    <dd class="col-sm-9">
+        <code>@GetRuntimeType(TempDataPocoList)</code>
+    </dd>
+</dl>
+
+<a href="/unsupported/tempdata/poco-list/set"
+   class="btn btn-outline-primary"
+   data-enhance-nav="false">
+    Set TempData POCO list again
+</a>
+
+@code {
+    [SupplyParameterFromTempData(Name = "Unsupported.TempData.PocoList")]
+    public List<ValidationPoco>? TempDataPocoList { get; set; }
+
+    private static string FormatList(List<ValidationPoco>? value)
+    {
+        return value is null
+            ? "<null>"
+            : $"[{string.Join(" | ", value)}]; Count={value.Count}";
+    }
+
+    private static string GetRuntimeType(object? value)
+        => value?.GetType().FullName ?? "<null>";
+}
