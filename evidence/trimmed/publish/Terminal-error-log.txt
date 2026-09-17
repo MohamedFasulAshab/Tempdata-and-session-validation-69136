@@ -5,12 +5,12 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: D:\Blazor application\Blazor Valiadation Temp  and session data\ValidationTempandSessiondata\artifacts\trimmed-auto-win-x64
+      Content root path: D:\BlazorValidation\TempDataSessionPropertyTypes\artifacts\trimmed-win-x64
 warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
       Failed to determine the https port for redirect.
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[3]
       An exception was thrown attempting to execute the error handler.
-      System.InvalidOperationException: A suitable constructor for type 'ValidationTempandSessiondata.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+      System.InvalidOperationException: A suitable constructor for type 'TempDataSessionValidation.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfoEx[] constructors, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactoryInternal(Type instanceType, Type[] argumentTypes, ParameterExpression& provider, ParameterExpression& argumentArray, Expression& factoryExpressionBody)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
@@ -58,7 +58,7 @@ fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[3]
          at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.HandleException(HttpContext context, ExceptionDispatchInfo edi)
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
       An unhandled exception has occurred while executing the request.
-      System.InvalidOperationException: A suitable constructor for type 'ValidationTempandSessiondata.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+      System.InvalidOperationException: A suitable constructor for type 'TempDataSessionValidation.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfoEx[] constructors, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactoryInternal(Type instanceType, Type[] argumentTypes, ParameterExpression& provider, ParameterExpression& argumentArray, Expression& factoryExpressionBody)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
@@ -105,8 +105,8 @@ fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
          at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
          at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
 fail: Microsoft.AspNetCore.Server.Kestrel[13]
-      Connection id "0HNOKFOS3A433", Request id "0HNOKFOS3A433:00000001": An unhandled exception was thrown by the application.
-      System.InvalidOperationException: A suitable constructor for type 'ValidationTempandSessiondata.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+      Connection id "0HNOKK8RCFMAM", Request id "0HNOKK8RCFMAM:00000001": An unhandled exception was thrown by the application.
+      System.InvalidOperationException: A suitable constructor for type 'TempDataSessionValidation.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfoEx[] constructors, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactoryInternal(Type instanceType, Type[] argumentTypes, ParameterExpression& provider, ParameterExpression& argumentArray, Expression& factoryExpressionBody)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
@@ -160,7 +160,7 @@ fail: Microsoft.AspNetCore.Server.Kestrel[13]
          at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[3]
       An exception was thrown attempting to execute the error handler.
-      System.InvalidOperationException: A suitable constructor for type 'ValidationTempandSessiondata.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+      System.InvalidOperationException: A suitable constructor for type 'TempDataSessionValidation.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfoEx[] constructors, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactoryInternal(Type instanceType, Type[] argumentTypes, ParameterExpression& provider, ParameterExpression& argumentArray, Expression& factoryExpressionBody)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
@@ -208,7 +208,7 @@ fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[3]
          at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.HandleException(HttpContext context, ExceptionDispatchInfo edi)
 fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
       An unhandled exception has occurred while executing the request.
-      System.InvalidOperationException: A suitable constructor for type 'ValidationTempandSessiondata.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+      System.InvalidOperationException: A suitable constructor for type 'TempDataSessionValidation.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfoEx[] constructors, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactoryInternal(Type instanceType, Type[] argumentTypes, ParameterExpression& provider, ParameterExpression& argumentArray, Expression& factoryExpressionBody)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
@@ -255,8 +255,8 @@ fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
          at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
          at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
 fail: Microsoft.AspNetCore.Server.Kestrel[13]
-      Connection id "0HNOKFOS3A433", Request id "0HNOKFOS3A433:00000002": An unhandled exception was thrown by the application.
-      System.InvalidOperationException: A suitable constructor for type 'ValidationTempandSessiondata.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+      Connection id "0HNOKK8RCFMAM", Request id "0HNOKK8RCFMAM:00000002": An unhandled exception was thrown by the application.
+      System.InvalidOperationException: A suitable constructor for type 'TempDataSessionValidation.Components.Pages.NotFound' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfoEx[] constructors, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactoryInternal(Type instanceType, Type[] argumentTypes, ParameterExpression& provider, ParameterExpression& argumentArray, Expression& factoryExpressionBody)
          at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
